@@ -113,6 +113,13 @@ char **get_environ(info_t *);
 int _unsetenv(info_t *, char *);
 int _setenv(info_t *, char *, char *);
 
+/* file_io_functions */
+char *get_hist_file(info_t *inf);
+int write_hist(info_t *inf);
+int read_hist(info_t *inf);
+int build_hist_list(info_t *inf, char *buf, int line_count);
+int renum_hist(info_t *inf);
+
 /* info module */
 void clr_info(info_t *);
 void set_info(info_t *, char **);

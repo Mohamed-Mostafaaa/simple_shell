@@ -77,5 +77,8 @@ char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
 
-// char **_strtow(char *, char *);
-// char **_strtow2(char *, char);
+/* error string functions */
+void _eputs(char *);
+int _eputschar(char);
+int _putfd(char c, int fd);
+int _putsfd(char *st, int fd);

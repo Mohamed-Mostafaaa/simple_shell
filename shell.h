@@ -193,3 +193,12 @@ void _eputs(char *);
 int _eputschar(char);
 int _putfd(char c, int fd);
 int _putsfd(char *st, int fd);
+
+/* chain */
+int is_chain(info_t *, char *, size_t *);
+void check_chain(info_t *, char *, size_t *, size_t, size_t);
+int replace_alias(info_t *);
+int replace_vars(info_t *);
+int replace_string(char **, char *);
+
+#endif

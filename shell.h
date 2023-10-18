@@ -102,6 +102,17 @@ typedef struct passinfo
 
 extern char **environ;
 
+/* enviroment module*/
+char *_getenv(info_t *, const char *);
+int _myenv(info_t *);
+int _mysetenv(info_t *);
+int _myunsetenv(info_t *);
+int pop_env_list(info_t *);
+
+char **get_environ(info_t *);
+int _unsetenv(info_t *, char *);
+int _setenv(info_t *, char *, char *);
+
 /* info module */
 void clr_info(info_t *);
 void set_info(info_t *, char **);

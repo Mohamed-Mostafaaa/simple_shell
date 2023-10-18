@@ -10,7 +10,7 @@
 
 int main(int ec, char **ev)
 {
-    info_t info[] = {INFO_INIT};
+    info_t inf[] = {INFO_INIT};
     int fd = 2;
 
     asm("mov %1, %0\n\t"
@@ -37,10 +37,10 @@ int main(int ec, char **ev)
             }
             return (EXIT_FAILURE);
         }
-        info->readfd = fd;
+        inf->readfd = fd;
     }
-    pop_env_list(info);
-    read_hist(info);
-    hsh(info, ev);
+    pop_env_list(inf);
+    read_hist(inf);
+    hsh(inf, ev);
     return (EXIT_SUCCESS)
 }

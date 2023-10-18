@@ -109,16 +109,16 @@ size_t print_list_str(const list_t *head)
 /**
  * free_list - Realease the memory allocated for a list
  *
- * @head: A pointer to the first node of the list to free
+ * @h: A pointer to the first node of the list to free
  */
 
-void free_list(list_t *head)
+void free_list(list_t *h)
 {
-    if (head)
+    if (h)
     {
-        free_list(head->next);
-        if (head->str)
-            free(head->str);
-        free(head);
+        free_list(h->next);
+        if (h->str)
+            free(h->str);
+        free(h);
     }
 }

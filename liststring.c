@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * print_list - check the code for Holberton School students.
+ * print_list - print all elements of a list.
  * @h: name of the list
  * Return: the number of nodes.
  */
@@ -27,7 +27,7 @@ size_t print_list(const list_t *h)
 }
 
 /**
- * list_len - check the code for Holberton School students.
+ * list_len - print legth of list.
  * @h: name of the list
  * Return: the number of nodes.
  */

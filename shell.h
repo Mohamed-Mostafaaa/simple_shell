@@ -110,6 +110,11 @@ int _mhelp(info_t *);
 int _mhistory(info_t *);
 int _malias(info_t *);
 
+/* path */
+int is_cmd(info_t *, char *);
+char *dup_chars(char *, int, int);
+char *find_path(info_t *, char *, char *);
+
 /* enviroment module*/
 char *_getenv(info_t *, const char *);
 int _myenv(info_t *);

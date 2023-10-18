@@ -132,6 +132,7 @@ size_t list_len(const list_t *);
 list_t *add_node(list_t **, const char *);
 list_t *add_node_end(list_t **, const char *);
 void free_list(list_t *);
+int del_node_at_index(list_t **, unsigned int);
 
 /* more functions */
 int interactive(info_t *);

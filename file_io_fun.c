@@ -121,7 +121,7 @@ int read_hist(info_t *inf)
     {
         del_node_at_index(&(inf->hist), 0);
     }
-    renumb_hist(info);
+    renum_hist(inf);
     return (inf->histcount);
 }
 

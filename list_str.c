@@ -85,23 +85,6 @@ list_t *add_node(list_t **head, const char *str)
 }
 
 /**
- * free_list - Realease the memory allocated for a list
- *
- * @head: A pointer to the first node of the list to free
- */
-
-void free_list(list_t *head)
-{
-    if (head)
-    {
-        free_list(head->next);
-        if (head->str)
-            free(head->str);
-        free(head);
-    }
-}
-
-/**
  * add_node_end - adds a new node to the end of linked list
  * @head: double pointer to a linked list
  * @str: string to add to the new node
@@ -135,26 +118,6 @@ list_t *add_node_end(list_t **head, const char *str)
         tmp = tmp->next;
     tmp->next = new;
     return (new);
-}
-
-/**
- * print_list_str - prints only the str element of a list_t linked list
- * @head: pointer to first node
- *
- * Return: size of list
- */
-
-size_t print_list_str(const list_t *head)
-{
-    size_t i;
-
-    for (i = 0; head; i++)
-    {
-        _puts(head->str ? head->str : "(nil)");
-        _puts("\n");
-        head = head->next;
-    }
-    return (i);
 }
 
 /**
@@ -192,45 +155,4 @@ char **list_to_str(list_t *h)
     }
     strs[i] = NULL;
     return (strs);
-}
-
-/**
- * del_node_at_index - deletes node at given index
- * @h: address of pointer to first node
- * @ind: index of node to delete
- *
- * Return: 1 on success, 0 on failure
- */
-
-int del_node_at_index(list_t **h, unsigned int ind)
-{
-	list_t *nod, *prev_nod;
-	unsigned int i = 0;
-
-	if (!h || !*h)
-		return (0);
-
-	if (!ind)
-	{
-		nod = *h;
-		*h = (*h)->next;
-		free(nod->str);
-		free(nod);
-		return (1);
-	}
-	nod = *h;
-	while (nod)
-	{
-		if (i == ind)
-		{
-			prev_nod->next = nod->next;
-			free(nod->str);
-			free(nod);
-			return (1);
-		}
-		i++;
-		prev_nod = nod;
-		nod = nod->next;
-	}
-	return (0);
 }

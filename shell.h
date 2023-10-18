@@ -102,6 +102,13 @@ typedef struct passinfo
 #define HIST_FILE ".simple_shell_history"
 #define HIST_MAX 4096
 
+/* builtin emulators */
+int _mexit(info_t *);
+int _mcd(info_t *);
+int _mhelp(info_t *);
+int _mhistory(info_t *);
+int _malias(info_t *);
+
 /* enviroment module*/
 char *_getenv(info_t *, const char *);
 int _myenv(info_t *);
@@ -133,13 +140,16 @@ int bfree(void **);
 
 /* list string model */
 char **list_to_str(list_t *);
-size_t print_list_str(const list_t *);
 size_t print_list(const list_t *);
 size_t list_len(const list_t *);
 list_t *add_node(list_t **, const char *);
 list_t *add_node_end(list_t **, const char *);
+
 void free_list(list_t *);
+size_t print_list_str(const list_t *);
 int del_node_at_index(list_t **, unsigned int);
+list_t *node_starts_with(list_t *, char *, char);
+ssize_t get_node_index(list_t *, list_t *);
 
 /* more functions */
 int interactive(info_t *);

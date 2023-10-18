@@ -106,6 +106,7 @@ typedef struct passinfo
 int _mexit(info_t *);
 int _mcd(info_t *);
 int _mhelp(info_t *);
+
 int _mhistory(info_t *);
 int _malias(info_t *);
 

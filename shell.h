@@ -17,6 +17,12 @@
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH -1
 
+/* memory functions */
+char *_memset(char *, char, unsigned int);
+void ffree(char **);
+void *_realloc(void *, unsigned int, unsigned int);
+int bfree(void **);
+
 /* string functions */
 int _strlen(char *);
 int _strcmp(char *, char *);
@@ -32,5 +38,5 @@ char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
 
-char **_strtow(char *, char *);
-char **_strtow2(char *, char);
+// char **_strtow(char *, char *);
+// char **_strtow2(char *, char);

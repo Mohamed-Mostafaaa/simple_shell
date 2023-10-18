@@ -104,8 +104,22 @@ int pop_env_list(info_t *inf)
     inf->env = nod;
     return (0);
 }
-char **get_environ(info_t *)
+
+/**
+ * get_environ - returns the string array copy of our environ
+ * @inf: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
+ * Return: Always 0
+ */
+
+char **get_environ(info_t *inf)
 {
+    if (!inf->environ || inf->env_change)
+    {
+        inf->environ = list_to_str(inf->env);
+        inf->env_change = 0;
+    }
+    return (inf->environ);
 }
 int _unsetenv(info_t *, char *)
 {

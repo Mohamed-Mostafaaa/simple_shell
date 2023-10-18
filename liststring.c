@@ -156,3 +156,40 @@ size_t print_list_str(const list_t *head)
     }
     return (i);
 }
+
+/**
+ * list_to_str - returns an array of strings of the list->str
+ * @h: pointer to first node
+ *
+ * Return: array of strings
+ */
+
+char **list_to_str(list_t *h)
+{
+    list_t *nod = h;
+    size_t i = list_len(h), x;
+    char **strs;
+    char *str;
+
+    if (!h || !i)
+        return (NULL);
+    strs = malloc(sizeof(char *) * (i + 1));
+    if (!strs)
+        return (NULL);
+    for (i = 0; nod; nod = nod->next, i++)
+    {
+        str = malloc(_strlen(nod->str) + 1);
+        if (!str)
+        {
+            for (x = 0; x < i; x++)
+                free(strs[x]);
+            free(strs);
+            return (NULL);
+        }
+
+        str = _strcpy(str, nod->str);
+        strs[i] = str;
+    }
+    strs[i] = NULL;
+    return (strs);
+}

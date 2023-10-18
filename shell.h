@@ -12,6 +12,8 @@
 #include <fcntl.h>
 #include <errno.h>
 
+extern char **environ;
+
 /**
  * struct list_s - singly linked list
  * @str: string - (malloc'ed string)
@@ -100,8 +102,6 @@ typedef struct passinfo
 #define HIST_FILE ".simple_shell_history"
 #define HIST_MAX 4096
 
-extern char **environ;
-
 /* enviroment module*/
 char *_getenv(info_t *, const char *);
 int _myenv(info_t *);
@@ -124,9 +124,10 @@ void ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
 int bfree(void **);
 
-/* liststr model */
-size_t print_list_str(const list_t *)
-    size_t print_list(const list_t *);
+/* list string model */
+char **list_to_str(list_t *);
+size_t print_list_str(const list_t *);
+size_t print_list(const list_t *);
 size_t list_len(const list_t *);
 list_t *add_node(list_t **, const char *);
 list_t *add_node_end(list_t **, const char *);

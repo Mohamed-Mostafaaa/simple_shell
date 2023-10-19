@@ -80,6 +80,12 @@ typedef struct passinfo
         NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0 \
     }
 
+typedef struct builtin
+{
+    char *type;
+    int (*func)(info_t *);
+} builtin_table;
+
 /* for convert_number */
 #define CONVERT_LOWERCASE 1
 #define CONVERT_UNSIGNED 2
@@ -117,7 +123,7 @@ char *find_path(info_t *, char *, char *);
 
 /* enviroment module*/
 char *_getenv(info_t *, const char *);
-int _myenv(info_t *);
+int _menv(info_t *);
 int _mysetenv(info_t *);
 int _myunsetenv(info_t *);
 int pop_env_list(info_t *);

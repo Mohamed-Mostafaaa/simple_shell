@@ -67,30 +67,116 @@ int hsh(info_t *inf, char **ev)
 int find_builtin(info_t *inf)
 {
     int i, built_in_ret = -1;
-    builtin_table builtintbl[] = {
+    builtin_table builtint[] = {
         {"exit", _mexit},
         {"env", _menv},
         {"help", _mhelp},
         {"history", _mhistory},
         {"setenv", _mysetenv},
         {"unsetenv", _myunsetenv},
-        {"cd", _mycd},
-        {"alias", _myalias},
+        {"cd", _mcd},
+        {"alias", _malias},
         {NULL, NULL}};
 
-    for (i = 0; builtintbl[i].type; i++)
-        if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
+    for (i = 0; builtint[i].type; i++)
+        if (_strcmp(inf->argv[0], builtint[i].type) == 0)
         {
-            info->line_count++;
-            built_in_ret = builtintbl[i].func(info);
+            inf->line_count++;
+            built_in_ret = builtint[i].func(inf);
             break;
         }
     return (built_in_ret);
 }
-}
-void find_cmd(info_t *)
+
+/**
+ * find_cmd - finds a command in PATH
+ * @inf: the parameter & return info struct
+ *
+ * Return: void
+ */
+
+void find_cmd(info_t *inf)
 {
+    char *path = NULL;
+    int i, k;
+
+    inf->path = inf->argv[0];
+    if (inf->linecount_flag == 1)
+    {
+        inf->line_count++;
+        inf->linecount_flag = 0;
+    }
+    for (i = 0, k = 0; inf->arg[i]; i++)
+    {
+        if (!is_delim(inf->arg[i], " \t\n"))
+        {
+            k++;
+        }
+    }
+    if (!k)
+    {
+        return;
+    }
+    path = find_path(inf, _getenv(inf, "PATH="), inf->argv[0]);
+    if (path)
+    {
+        inf->path = path;
+        fork_cmd(inf);
+    }
+    else
+    {
+        if ((interactive(inf) || _getenv(inf, "PATH=") || inf->argv[0][0] == '/') && is_cmd(inf, inf->argv[0]))
+        {
+            fork_cmd(info);
+        }
+        else if (*(info->arg) != '\n')
+        {
+            inf->stat = 127;
+            print_error(inf, "not found\n");
+        }
+    }
 }
-void fork_cmd(info_t *)
+
+/**
+ * fork_cmd - forks a an exec thread to run cmd
+ * @inf: the parameter & return info struct
+ *
+ * Return: void
+ */
+
+void fork_cmd(info_t *inf)
 {
+    pid_t child_pid;
+
+    child_pid = fork();
+    if (child_pid == -1)
+    {
+        /* TODO: PUT ERROR FUNCTION */
+        perror("Error:");
+        return;
+    }
+    if (child_pid == 0)
+    {
+        if (execve(inf->path, inf->argv, get_environ(inf)) == -1)
+        {
+            free_info(inf, 1);
+            if (errno == EACCES)
+            {
+                exit(126);
+            }
+            exit(1);
+        }
+    }
+    else
+    {
+        wait(&(inf->stat));
+        if (WIFEXITED(inf->stat))
+        {
+            inf->stat = WEXITSTATUS(inf->stat);
+            if (inf->stat == 126)
+            {
+                print_error(inf, "Permission denied\n");
+            }
+        }
+    }
 }

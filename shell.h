@@ -201,4 +201,10 @@ int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **old, char *new);
 
+/* hsh */
+int hsh(info_t *, char **);
+int find_builtin(info_t *);
+void find_cmd(info_t *);
+void fork_cmd(info_t *);
+
 #endif /* SHELL_H */

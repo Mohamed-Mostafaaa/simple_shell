@@ -26,13 +26,13 @@ char *_getenv(info_t *inf, const char *na)
 }
 
 /**
- * _myenv - prints the current environmoent
+ * _menv - prints the current environmoent
  * @inf: Structure containing potential arguments. Used to maintain
  *       counstant function prototype.
  * Return: Always 0
  */
 
-int _myenv(info_t *inf)
+int _menv(info_t *inf)
 {
     print_list_str(inf->env);
     return (0);

@@ -70,6 +70,7 @@ char *starts_with(const char *hay, const char *needl)
  * @src:char
  * Return:char
  */
+
 char *_strcat(char *dest, char *src)
 {
     char *s = dest;
@@ -81,9 +82,9 @@ char *_strcat(char *dest, char *src)
 
     while (*src != '\0')
     {
-        *dest = *src;
-        dest++;
-        src++;
+	*dest = *src;
+	dest++;
+	src++;
     }
     *dest = '\0';
     return (s);

@@ -10,19 +10,20 @@
 
 int unset_alias(info_t *inf, char *st)
 {
-    char *p, c;
-    int ret;
+	char *p, c;
+	int ret;
 
-    p = _strchr(st, '=');
-    if (!p)
-    {
-        return (1);
-    }
-    c = *p;
-    *p = 0;
-    ret = del_node_at_index(&(inf->alias), get_node_index(inf->alias, node_starts_with(inf->alias, st, -1)));
-    *p = c;
-    return (ret);
+	p = _strchr(st, '=');
+	if (!p)
+	{
+		return (1);
+	}
+	c = *p;
+	*p = 0;
+	ret = del_node_at_index(&(inf->alias), get_node_index(inf->alias,
+	node_starts_with(inf->alias, st, -1)));
+	*p = c;
+	return (ret);
 }
 
 /**
@@ -35,19 +36,20 @@ int unset_alias(info_t *inf, char *st)
 
 int set_alias(info_t *inf, char *st)
 {
-    char *p;
+	char *p;
 
-    p = _strchr(st, '=');
-    if (!p)
-    {
-        return (1);
-    }
-    if (!*++p)
-    {
-        return (unset_alias(inf, st));
-    }
-    unset_alias(inf, st);
-    return (add_node_end(&(inf->alias), st, 0) == NULL);
+	p = _strchr(st, '=');
+	if (!p)
+	{
+	return (1);
+	}
+	if (!*++p)
+	{
+		return (unset_alias(inf, st));
+	}
+
+	unset_alias(inf, st);
+	return (add_node_end(&(inf->alias), st, 0) == NULL);
 }
 
 /**
@@ -59,59 +61,60 @@ int set_alias(info_t *inf, char *st)
 
 int print_alias(list_t *nod)
 {
-    char *p = NULL, *a = NULL;
+	char *p = NULL, *a = NULL;
 
-    if (nod)
-    {
-        p = _strchr(nod->str, '=');
-        for (a = nod->str; a <= p; a++)
-        {
-            _putchar(*a);
-        }
-        _putchar('\'');
-        _puts(p + 1);
-        _puts("'\n");
-        return (0);
-    }
-    return (1);
+	if (nod)
+	{
+		p = _strchr(nod->str, '=');
+		for (a = nod->str; a <= p; a++)
+		{
+			_putchar(*a);
+		}
+		_putchar('\'');
+		_puts(p + 1);
+		_puts("'\n");
+		return (0);
+	}
+	return (1);
 }
 
 /**
- * _mylias - mimics the alias builtin (man alias)
+ * _malias - mimics the alias builtin (man alias)
  * @inf: Structure containing potential arguments. Used to maintain
  *          constant function prototype.
  *  Return: Always 0
  */
+
 int _malias(info_t *inf)
 {
-    int i = 0;
-    char *p = NULL;
-    list_t *nod = NULL;
+	int i = 0;
+	char *p = NULL;
+	list_t *nod = NULL;
 
-    if (inf->argc == 1)
-    {
-        nod = inf->alias;
-        while (nod)
-        {
-            print_alias(nod);
-            nod = nod->next;
-        }
-        return (0);
-    }
-    for (i = 1; inf->argv[i]; i++)
-    {
-        p = _strchr(inf->argv[i], '=');
-        if (p)
-        {
-            set_alias(inf, inf->argv[i]);
-        }
-        else
-        {
-            print_alias(node_starts_with(inf->alias, inf->argv[i], '='));
-        }
-    }
+	if (inf->argc == 1)
+	{
+		nod = inf->alias;
+		while (nod)
+		{
+			print_alias(nod);
+			nod = nod->next;
+		}
+		return (0);
+	}
+	for (i = 1; inf->argv[i]; i++)
+	{
+		p = _strchr(inf->argv[i], '=');
+		if (p)
+		{
+			set_alias(inf, inf->argv[i]);
+		}
+		else
+		{
+			print_alias(node_starts_with(inf->alias, inf->argv[i], '='));
+		}
+	}
 
-    return (0);
+	return (0);
 }
 
 /**
@@ -124,6 +127,6 @@ int _malias(info_t *inf)
 
 int _mhistory(info_t *inf)
 {
-    print_list(inf->hist);
-    return (0);
+	print_list(inf->hist);
+	return (0);
 }

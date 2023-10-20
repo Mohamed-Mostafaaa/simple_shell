@@ -23,7 +23,7 @@ void _eputs(char *st)
 }
 
 /**
- * _eputschar (char c) - writes the character c to stderr
+ * _eputschar - writes the character c to stderr
  * @c: the character to print
  *
  * Return: On success 1

@@ -25,9 +25,9 @@ extern char **environ;
  */
 typedef struct list_s
 {
-    char *str;
-    unsigned int len;
-    struct list_s *next;
+	char *str;
+	unsigned int len;
+	struct list_s *next;
 } list_t;
 
 /**
@@ -54,36 +54,46 @@ typedef struct list_s
  */
 typedef struct passinfo
 {
-    char *arg;
-    char **argv;
-    char *path;
-    int argc;
-    unsigned int line_count;
-    int err_len;
-    int linecount_flag;
-    char *fname;
-    list_t *env;
-    list_t *hist;
-    list_t *alias;
-    char **environ;
-    int env_change;
-    int stat;
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int line_count;
+	int err_len;
+	int linecount_flag;
+	char *fname;
+	list_t *env;
+	list_t *hist;
+	list_t *alias;
+	char **environ;
+	int env_change;
+	int stat;
 
-    char **cmd_buf;   /* pointer to cmd ; chain buffer, for memory mangement */
-    int cmd_buf_type; /* CMD_type ||, &&, ; */
-    int readfd;
-    int histcount;
+	char **cmd_buf;   /* pointer to cmd ; chain buffer, for memory mangement */
+	int cmd_buf_type; /* CMD_type ||, &&, ; */
+	int readfd;
+	int histcount;
 } info_t;
 
-#define INFO_INIT                                                                       \
-    {                                                                                   \
-        NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0 \
-    }
+#define INFO_INIT\
+	{\
+		NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL,\
+		0, 0, NULL, 0, 0, 0\
+	}
+
+/**
+ *struct builtin - builtin
+ * @type: string - (malloc'ed string)
+ * @func: length of the string
+ *
+ * Description: singly linked list node structure
+ * for ALX project
+ */
 
 typedef struct builtin
 {
-    char *type;
-    int (*func)(info_t *);
+	char *type;
+	int (*func)(info_t *);
 } builtin_table;
 
 /* for convert_number */

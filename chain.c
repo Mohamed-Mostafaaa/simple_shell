@@ -144,7 +144,6 @@ int replace_vars(info_t *inf)
 	return (0);
 }
 
-
 /**
  * replace_string - replaces string
  * @old: address of old string

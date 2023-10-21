@@ -186,7 +186,7 @@ void remove_comments(char *);
 int _erratoi(char *);
 
 /* string functions */
-int _strlen(char *);
+int _strlen(const char *);
 int _strcmp(char *, char *);
 char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);

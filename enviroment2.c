@@ -38,7 +38,7 @@ int _setenv(info_t *inf, char *v, char *val)
 		}
 		nod = nod->next;
 	}
-	add_node_end(&(inf->env), buf, 0);
+	add_node_end(&(inf->env), buf);
 	free(buf);
 	inf->env_change = 1;
 	return (0);

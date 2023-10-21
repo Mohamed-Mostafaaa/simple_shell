@@ -54,7 +54,7 @@ int _mysetenv(info_t *inf)
 		_eputs("Incorrect number of arguements\n");
 		return (1);
 	}
-	if (_setenv(info, inf->argv[1], inf->argv[2]))
+	if (_setenv(inf, inf->argv[1], inf->argv[2]))
 	{
 		return (0);
 	}
@@ -99,7 +99,7 @@ int pop_env_list(info_t *inf)
 
 	while (environ[i])
 	{
-		add_node_end(&nod, environ[i], 0);
+		add_node_end(&nod, environ[i]);
 		i++;
 	}
 	inf->env = nod;

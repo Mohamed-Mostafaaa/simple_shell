@@ -1,5 +1,5 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef ______SHELL______H______
+#define ______SHELL______H______
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,217 +12,167 @@
 #include <fcntl.h>
 #include <errno.h>
 
-extern char **environ;
-
-/**
- * struct list_s - singly linked list
- * @str: string - (malloc'ed string)
- * @len: length of the string
- * @next: points to the next node
- *
- * Description: singly linked list node structure
- * for ALX project
- */
-typedef struct list_s
-{
-	char *str;
-	unsigned int len;
-	struct list_s *next;
-} list_t;
-
-/**
- *struct passinfo - contains pseudo-arguements to pass into a function,
- *					allowing uniform prototype for function pointer struct
- *@arg: a string generated from getline containing arguements
- *@argv: an array of strings generated from arg
- *@path: a string path for the current command
- *@argc: the argument count
- *@line_count: the error count
- *@err_len: the error code for exit()s
- *@linecount_flag: if on count this line of input
- *@fname: the program filename
- *@env: linked list local copy of environ
- *@environ: custom modified copy of environ from LL env
- *@hist: the history node
- *@alias: the alias node
- *@env_change: on if environ was changed
- *@stat: the return status of the last exec'd command
- *@cmd_buf: address of pointer to cmd_buf, on if chaining
- *@cmd_buf_type: CMD_type ||, &&, ;
- *@readfd: the fd from which to read line input
- *@histcount: the history line number count
- */
-typedef struct passinfo
-{
-	char *arg;
-	char **argv;
-	char *path;
-	int argc;
-	unsigned int line_count;
-	int err_len;
-	int linecount_flag;
-	char *fname;
-	list_t *env;
-	list_t *hist;
-	list_t *alias;
-	char **environ;
-	int env_change;
-	int stat;
-
-	char **cmd_buf;   /* pointer to cmd ; chain buffer, for memory mangement */
-	int cmd_buf_type; /* CMD_type ||, &&, ; */
-	int readfd;
-	int histcount;
-} info_t;
-
-#define INFO_INIT\
-	{\
-		NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL,\
-		0, 0, NULL, 0, 0, 0\
-	}
-
-/**
- *struct builtin - builtin
- * @type: string - (malloc'ed string)
- * @func: length of the string
- *
- * Description: singly linked list node structure
- * for ALX project
- */
-
-typedef struct builtin
-{
-	char *type;
-	int (*func)(info_t *);
-} builtin_table;
-
-/* for convert_number */
-#define CONVERT_LOWERCASE 1
-#define CONVERT_UNSIGNED 2
-
-/* for read/write buffers */
-#define READ_BUF_SIZE 1024
-#define WRITE_BUF_SIZE 1024
-#define BUF_FLUSH -1
-
-/* four command chaining */
-#define CMD_NORM 0
-#define CMD_OR 1
-#define CMD_AND 2
-#define CMD_CHAIN 3
-
-/* 1 if using system getline */
+#define ReadBufSize 1024
+#define WriteBufSize 1024
+#define BufFlush -1
+#define CmdNorm 0
+#define CmdOr       1
+#define CmdAnd      2
+#define CmdChain    3
+#define ConvertLowercase    1
+#define UnsignedConvert 2
 #define USE_GETLINE 0
 #define USE_STRTOK 0
-
-#define HIST_FILE ".simple_shell_history"
-#define HIST_MAX 4096
-
-/* builtin emulators */
-int _mexit(info_t *);
-int _mcd(info_t *);
-int _mhelp(info_t *);
-
-int _mhistory(info_t *);
-int _malias(info_t *);
-
-/* path */
-int is_cmd(info_t *, char *);
-char *dup_chars(char *, int, int);
-char *find_path(info_t *, char *, char *);
-
-/* enviroment module*/
-char *_getenv(info_t *, const char *);
-int _menv(info_t *);
-int _mysetenv(info_t *);
-int _myunsetenv(info_t *);
-int pop_env_list(info_t *);
-
-char **get_environ(info_t *);
-int _unsetenv(info_t *, char *);
-int _setenv(info_t *, char *, char *);
-
-/* file_io_functions */
-char *get_hist_file(info_t *inf);
-int write_hist(info_t *inf);
-int read_hist(info_t *inf);
-int build_hist_list(info_t *inf, char *buf, int);
-int renum_hist(info_t *inf);
-
-/* info module */
-void clr_info(info_t *);
-void set_info(info_t *, char **);
-void free_info(info_t *, int);
-
-/* memory functions */
-char *_memset(char *, char, unsigned int);
-void ffree(char **);
-void *_realloc(void *, unsigned int, unsigned int);
-int bfree(void **);
-
-/* list string model */
-char **list_to_str(list_t *);
-size_t print_list(const list_t *);
-size_t list_len(const list_t *);
-list_t *add_node(list_t **, const char *);
-list_t *add_node_end(list_t **, const char *);
-
-void free_list(list_t *);
-size_t print_list_str(const list_t *);
-int del_node_at_index(list_t **, unsigned int);
-list_t *node_starts_with(list_t *, char *, char);
-ssize_t get_node_index(list_t *, list_t *);
-
-/* more functions */
-int interactive(info_t *);
-int is_delim(char, char *);
-int _isalpha(int);
-int _atoi(char *);
-
-int print_d(int input, int);
-void print_error(info_t *, char *);
-char *convert_number(long int, int, int);
-void remove_comments(char *);
-int _erratoi(char *);
-
-/* string functions */
-int _strlen(const char *);
-int _strcmp(char *, char *);
-char *starts_with(const char *, const char *);
-char *_strcat(char *, char *);
-
-char *_strcpy(char *, char *);
-char *_strdup(const char *);
-void _puts(char *);
-int _putchar(char);
-
-char *_strncpy(char *, char *, int);
+#define FileHist    ".simple_shell_history"
+#define MaxHist 4096
+extern char **environ;
+/**
+ * struct strList - list
+ * @num: number
+ * @str: string
+ * @next: next
+ */
+typedef struct strList
+{
+int num;
+char *str;
+struct strList *next;
+} type_List;
+/**
+ * struct infoPass - Huge List
+ * @arg: argument
+ * @argv: vector
+ * @path: path
+ * @argc: Number of args
+ * @line_count: Number of errors
+ * @err_num: error
+ * @linecount_flag: flage
+ * @fname: name of file
+ * @env: list
+ * @environ: environment
+ * @history: history
+ * @alias: alias
+ * @env_changed: new environ
+ * @status: status
+ * @cmd_buf: BF cmd
+ * @cmd_buf_type: type BF cmd
+ * @readfd: file description
+ * @histcount: count of history
+ */
+typedef struct infoPass
+{
+char *arg;
+char **argv;
+char *path;
+int argc;
+unsigned int line_count;
+int err_num;
+int linecount_flag;
+char *fname;
+type_List *env;
+type_List *history;
+type_List *alias;
+char **environ;
+int env_changed;
+int status;
+char **cmd_buf;
+int cmd_buf_type;
+int readfd;
+int histcount;
+} type_info;
+#define InitInfo \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+0, 0, 0}
+/**
+ * struct Built - all builtin functions
+ * @type: flage
+ * @func: fun
+ */
+typedef struct Built
+{
+char *type;
+int (*func)(type_info *);
+} TableBuilt;
+int our_lengthstr(char *);
+int our_compStr(char *, char *);
+char *pointOfSt(const char *, const char *);
+char *our_catStr(char *, char *);
+char *our_CpyStr(char *, char *);
+char *our_DupStr(const char *);
+void our_FPuts(char *);
+int our_CharPut(char);
+char *our_Strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
-char *_strchr(char *, char);
-char **strtow(char *);
-char **strtow2(char *, char);
-void util(char **, char *);
-void create_word(char **, char *, int, int, int);
-
-/* error string functions */
-void _eputs(char *);
-int _eputschar(char);
-int _putfd(char c, int fd);
-int _putsfd(char *st, int fd);
-
-/* chain */
-int is_chain(info_t *, char *, size_t *);
-void check_chain(info_t *, char *, size_t *, size_t, size_t);
-int replace_alias(info_t *);
-int replace_vars(info_t *);
-int replace_string(char **old, char *new);
-
-/* hsh */
-int hsh(info_t *, char **);
-int find_builtin(info_t *);
-void find_cmd(info_t *);
-void fork_cmd(info_t *);
-ssize_t get_input(info_t *inf);
-ssize_t input_buf(info_t *inf, char **bu, size_t *len);
-
-#endif /* SHELL_H */
+char *our_Strch(char *, char);
+char **wfromstr(char *, char *);
+char **wfromstr2(char *, char);
+char *our_Memset(char *, char, unsigned int);
+void ourFreeF(char **);
+void *our_Realloc(void *, unsigned int, unsigned int);
+int ourFreeB(void **);
+int checkAct(type_info *);
+int checkDel(char, char *);
+int check_alpha(int);
+int our_atoi(char *);
+int our_Eratoi(char *);
+void Er_Printing(type_info *, char *);
+int dec_Printing(int, int);
+char *num_converting(long int, int, int);
+void Com_Removing(char *);
+int our_Ex(type_info *);
+int our_Cd(type_info *);
+int our_Help(type_info *);
+int our_Hist(type_info *);
+int our_Alias(type_info *);
+ssize_t obtain_inputtting(type_info *);
+int our_Getline(type_info *, char **, size_t *);
+void HandlerSigin(int);
+void f_clearing(type_info *);
+void f_setting(type_info *, char **);
+void f_freeing(type_info *, int);
+char *obtain_Env(type_info *, const char *);
+int our_Env(type_info *);
+int our_env_setting(type_info *);
+int our_env_unsetting(type_info *);
+int Env_list_Pop(type_info *);
+char **obt_Environ(type_info *);
+int our_Envunsetting(type_info *, char *);
+int our_Envsetting(type_info *, char *, char *);
+char *obt_FHist(type_info *info);
+int Hist_Writing(type_info *info);
+int Hist_reading(type_info *info);
+int creat_ListHist(type_info *info, char *buf, int linecount);
+int Hist_Renumbering(type_info *info);
+type_List *creat_Lnode(type_List **, const char *, int);
+type_List *creat_EnNode(type_List **, const char *, int);
+size_t ListStr_printing(const type_List *);
+int indnode_Rem(type_List **, unsigned int);
+void alllist_Freeing(type_List **);
+size_t length_List(const type_List *);
+char **string_from_list(type_List *);
+size_t displays_List(const type_List *);
+int alias_setting(type_info *, char *);
+ssize_t BF_reading(type_info *, char *, size_t *);
+ssize_t BF_inputting(type_info *, char **, size_t *);
+int strREPLACING(char **, char *);
+int mHSH(type_info *, char **);
+int built_Finder(type_info *);
+void cmdFinder(type_info *);
+void cmdForking(type_info *);
+int check_cmd(type_info *, char *);
+char *chDuplicate(char *, int, int);
+char *pathFinder(type_info *, char *, char *);
+int loophsh(char **);
+void our_Eputs(char *);
+int our_Eputchar(char);
+int decrF_Put(char c, int fd);
+int descF_Puts(char *str, int fd);
+type_List *stNode_by(type_List *, char *, char);
+ssize_t obtain_IN(type_List *, type_List *);
+int check_the_chain(type_info *, char *, size_t *);
+void chainCHECK(type_info *, char *, size_t *, size_t, size_t);
+int alias_REPLACING(type_info *);
+int VarReplacing(type_info *);
+int alias_unsetting(type_info *, char *);
+int alias_printing(type_List *);
+#endif

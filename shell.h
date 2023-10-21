@@ -222,5 +222,7 @@ int hsh(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
 void fork_cmd(info_t *);
+ssize_t get_input(info_t *inf);
+ssize_t input_buf(info_t *inf, char **bu, size_t *len);
 
 #endif /* SHELL_H */

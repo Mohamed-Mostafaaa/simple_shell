@@ -54,11 +54,12 @@ char *_strncat(char *dest, char *src, int n)
 /**
  * strtow - splits a string into words.
  * @str: the string
+ * @s: i don't know
  *
  * Return: returns a pointer to an array of strings (words)
  */
 
-char **strtow(char *str)
+char **strtow(char *str, char s[])
 {
 	int i, flag, len;
 	char **words;

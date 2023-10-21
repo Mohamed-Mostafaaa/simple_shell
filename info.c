@@ -66,7 +66,7 @@ void set_info(info_t *inf, char **ev)
 	inf->fname = ev[0];
 	if (inf->arg)
 	{
-		inf->argv = strtow(info->arg, " \t");
+		inf->argv = strtow(inf->arg);
 		if (!inf->argv)
 		{
 			inf->argv = malloc(sizeof(char *) * 2);

@@ -33,7 +33,7 @@ char *_strcpy(char *dest, char *src)
  * It returns NULL if insufficient memory was available
  */
 
-char *_strdup(char *str)
+char *_strdup(const char *str)
 {
 	char *copy;
 	int i, len = 0;

@@ -12,7 +12,7 @@ int _mexit(info_t *inf)
 {
 	int exitcheck;
 
-	if (inf->argv[i]) /* If there is an exit arguement */
+	if (inf->argv[1]) /* If there is an exit arguement */
 	{
 		exitcheck = _erratoi(inf->argv[1]);
 		if (exitcheck == -1)

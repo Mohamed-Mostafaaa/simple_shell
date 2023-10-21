@@ -49,7 +49,7 @@ int set_alias(info_t *inf, char *st)
 	}
 
 	unset_alias(inf, st);
-	return (add_node_end(&(inf->alias), st, 0) == NULL);
+	return (add_node_end(&(inf->alias), st) == NULL);
 }
 
 /**

@@ -126,7 +126,7 @@ int renum_hist(info_t *inf)
 
 	for (i = 0; nod;)
 	{
-		nod->num = i++;
+		nod->len = i++;
 		nod = nod->next;
 	}
 	return (inf->histcount = i);
@@ -149,7 +149,7 @@ int build_hist_list(info_t *inf, char *bu, int line_count)
 	{
 		nod = inf->hist;
 	}
-	add_node_end(&nod, bu, line_count);
+	add_node_end(&nod, bu);
 
 	if (!inf->hist)
 	{

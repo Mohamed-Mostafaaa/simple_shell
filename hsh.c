@@ -18,7 +18,7 @@ int hsh(info_t *inf, char **ev)
 		clr_info(inf);
 		if (interactive(inf))
 			_puts("$ ");
-		_eputchar(BUF_FLUSH);
+		_eputschar(BUF_FLUSH);
 		r = get_input(inf);
 		if (r != -1)
 		{

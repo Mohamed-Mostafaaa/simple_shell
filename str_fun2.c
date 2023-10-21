@@ -12,16 +12,16 @@
 
 char *_strcpy(char *dest, char *src)
 {
-    int a, b = 0;
+	int a, b = 0;
 
-    for (a = 0; src[a] != '\0'; ++a)
-    {
-        dest[b] = src[a];
-        ++b;
-    }
-    dest[b] = '\0';
+	for (a = 0; src[a] != '\0'; ++a)
+	{
+		dest[b] = src[a];
+		++b;
+	}
+	dest[b] = '\0';
 
-    return (dest);
+	return (dest);
 }
 
 /**
@@ -32,26 +32,27 @@ char *_strcpy(char *dest, char *src)
  * Return: returns a pointer to the duplicated string.
  * It returns NULL if insufficient memory was available
  */
+
 char *_strdup(char *str)
 {
-    char *copy;
-    int i, len = 0;
+	char *copy;
+	int i, len = 0;
 
-    if (str == NULL)
-        return (NULL);
+	if (str == NULL)
+		return (NULL);
 
-    while (str[len] != '\0')
-        len++;
+	while (str[len] != '\0')
+		len++;
 
-    copy = (char *)malloc((sizeof(char) * len) + 1);
-    if (copy == NULL)
-        return (NULL);
+	copy = (char *)malloc((sizeof(char) * len) + 1);
+	if (copy == NULL)
+		return (NULL);
 
-    for (i = 0; i < len; i++)
-        copy[i] = str[i];
-    copy[len] = '\0';
+	for (i = 0; i < len; i++)
+		copy[i] = str[i];
+	copy[len] = '\0';
 
-    return (copy);
+	return (copy);
 }
 
 /**
@@ -63,12 +64,12 @@ char *_strdup(char *str)
 
 void _puts(char *str)
 {
-    while (*str != '\0')
-    {
-        _putchar(*str + 0);
-        ++str;
-    }
-    _putchar('\n');
+	while (*str != '\0')
+	{
+		_putchar(*str + 0);
+		++str;
+	}
+	_putchar('\n');
 }
 
 /**
@@ -81,18 +82,38 @@ void _puts(char *str)
 
 int _putchar(char c)
 {
-    static int i;
-    static char buf(WRITE_BUF_SIZE);
+	static int i;
 
-    if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
-    {
-        write(1, &buf, i);
-        i = 0;
-    }
-    if (c != BUF_FLUSH)
-    {
-        buf[i++] = c;
-    }
+	static char buf(WRITE_BUF_SIZE);
 
-    return (1);
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	{
+		write(1, &buf, i);
+		i = 0;
+	}
+	if (c != BUF_FLUSH)
+	{
+		buf[i++] = c;
+	}
+	return (1);
+}
+
+/**
+ * _strchr - Locate a character in a string.
+ * @s: String.
+ * @c: Character.
+ * Return: The firs occuerrence of hte character in the string or NULL.
+ */
+
+char *_strchr(char *s, char c)
+{
+	int index;
+
+	for (index = 0; s[index] >= '\0'; index++)
+	{
+		if (s[index] == c)
+			return (s + index);
+	}
+
+	return ('\0');
 }

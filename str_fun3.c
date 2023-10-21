@@ -9,19 +9,20 @@
  *
  * Return: pointer to the resulting string dest
  */
+
 char *_strncpy(char *dest, char *src, int n)
 {
-    int i;
+	int i;
 
-    for (i = 0; i < n && *(src + i); i++)
-    {
-        *(dest + i) = *(src + i);
-    }
-    for (; i < n; i++)
-    {
-        *(dest + i) = '\0';
-    }
-    return (dest);
+	for (i = 0; i < n && *(src + i); i++)
+	{
+		*(dest + i) = *(src + i);
+	}
+	for (; i < n; i++)
+	{
+		*(dest + i) = '\0';
+	}
+	return (dest);
 }
 
 /**
@@ -33,40 +34,21 @@ char *_strncpy(char *dest, char *src, int n)
  *
  * Return: pointer to the resulting string dest
  */
+
 char *_strncat(char *dest, char *src, int n)
 {
-    int i, j;
+	int i, j;
 
-    for (i = 0; dest[i] != '\0'; i++)
-    {
-        continue;
-    }
-    for (j = 0; src[j] != '\0' && j < n; j++)
-    {
-        dest[i + j] = src[j];
-    }
-    dest[i + j] = '\0';
-    return (dest);
-}
-
-/**
- * _strchr - Locate a character in a string.
- * @s: String.
- * @c: Character.
- * Return: The firs occuerrence of hte character in the string or NULL.
- */
-
-char *_strchr(char *s, char c)
-{
-    int index;
-
-    for (index = 0; s[index] >= '\0'; index++)
-    {
-        if (s[index] == c)
-            return (s + index);
-    }
-
-    return ('\0');
+	for (i = 0; dest[i] != '\0'; i++)
+	{
+		continue;
+	}
+	for (j = 0; src[j] != '\0' && j < n; j++)
+	{
+		dest[i + j] = src[j];
+	}
+	dest[i + j] = '\0';
+	return (dest);
 }
 
 /**
@@ -75,38 +57,39 @@ char *_strchr(char *s, char c)
  *
  * Return: returns a pointer to an array of strings (words)
  */
+
 char **strtow(char *str)
 {
-    int i, flag, len;
-    char **words;
+	int i, flag, len;
+	char **words;
 
-    if (str == NULL || str[0] == '\0' || (str[0] == ' ' && str[1] == '\0'))
-        return (NULL);
+	if (str == NULL || str[0] == '\0' || (str[0] == ' ' && str[1] == '\0'))
+		return (NULL);
 
-    i = flag = len = 0;
-    while (str[i])
-    {
-        if (flag == 0 && str[i] != ' ')
-            flag = 1;
-        if (i > 0 && str[i] == ' ' && str[i - 1] != ' ')
-        {
-            flag = 0;
-            len++;
-        }
-        i++;
-    }
+	i = flag = len = 0;
+	while (str[i])
+	{
+		if (flag == 0 && str[i] != ' ')
+			flag = 1;
+		if (i > 0 && str[i] == ' ' && str[i - 1] != ' ')
+		{
+			flag = 0;
+			len++;
+		}
+		i++;
+	}
 
-    len += flag == 1 ? 1 : 0;
-    if (len == 0)
-        return (NULL);
+	len += flag == 1 ? 1 : 0;
+	if (len == 0)
+		return (NULL);
 
-    words = (char **)malloc(sizeof(char *) * (len + 1));
-    if (words == NULL)
-        return (NULL);
+	words = (char **)malloc(sizeof(char *) * (len + 1));
+	if (words == NULL)
+		return (NULL);
 
-    util(words, str);
-    words[len] = NULL;
-    return (words);
+	util(words, str);
+	words[len] = NULL;
+	return (words);
 }
 
 /**
@@ -117,29 +100,29 @@ char **strtow(char *str)
 
 void util(char **words, char *str)
 {
-    int i, j, start, flag;
+	int i, j, start, flag;
 
-    i = j = flag = 0;
-    while (str[i])
-    {
-        if (flag == 0 && str[i] != ' ')
-        {
-            start = i;
-            flag = 1;
-        }
+	i = j = flag = 0;
+	while (str[i])
+	{
+		if (flag == 0 && str[i] != ' ')
+		{
+			start = i;
+			flag = 1;
+		}
 
-        if (i > 0 && str[i] == ' ' && str[i - 1] != ' ')
-        {
-            create_word(words, str, start, i, j);
-            j++;
-            flag = 0;
-        }
+		if (i > 0 && str[i] == ' ' && str[i - 1] != ' ')
+		{
+			create_word(words, str, start, i, j);
+			j++;
+			flag = 0;
+		}
 
-        i++;
-    }
+		i++;
+	}
 
-    if (flag == 1)
-        create_word(words, str, start, i, j);
+	if (flag == 1)
+		create_word(words, str, start, i, j);
 }
 
 /**
@@ -153,12 +136,12 @@ void util(char **words, char *str)
 
 void create_word(char **words, char *str, int start, int end, int index)
 {
-    int i, j;
+	int i, j;
 
-    i = end - start;
-    words[index] = (char *)malloc(sizeof(char) * (i + 1));
+	i = end - start;
+	words[index] = (char *)malloc(sizeof(char) * (i + 1));
 
-    for (j = 0; start < end; start++, j++)
-        words[index][j] = str[start];
-    words[index][j] = '\0';
+	for (j = 0; start < end; start++, j++)
+		words[index][j] = str[start];
+	words[index][j] = '\0';
 }

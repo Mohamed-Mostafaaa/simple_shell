@@ -10,12 +10,12 @@
 
 int _strlen(char *s)
 {
-    int counter;
+	int counter;
 
-    for (counter = 0; *s != '\0'; ++s)
-        ++counter;
+	for (counter = 0; *s != '\0'; ++s)
+		++counter;
 
-    return (counter);
+	return (counter);
 }
 
 /**
@@ -29,21 +29,21 @@ int _strlen(char *s)
 
 int _strcmp(char *s1, char *s2)
 {
-    while (((*s1 != '\0') && (*s2 != '\0')) && (*s1 == *s2))
-    {
-        s1++;
-        s2++;
-    }
+	while (((*s1 != '\0') && (*s2 != '\0')) && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
 
-    if (*s1 == *s2)
-    {
-        return (0);
-    }
+	if (*s1 == *s2)
+	{
+		return (0);
+	}
 
-    else
-    {
-        return (*s1 - *s2);
-    }
+	else
+	{
+		return (*s1 - *s2);
+	}
 }
 /**
  * starts_with - checks if needle starts with haystack
@@ -54,14 +54,14 @@ int _strcmp(char *s1, char *s2)
  */
 char *starts_with(const char *hay, const char *needl)
 {
-    while (*needl)
-    {
-        if (*needl++ != *hay++)
-        {
-            return (NULL);
-        }
-    }
-    return ((char *)hay);
+	while (*needl)
+	{
+		if (*needl++ != *hay++)
+		{
+			return (NULL);
+		}
+	}
+	return ((char *)hay);
 }
 
 /**
@@ -73,21 +73,21 @@ char *starts_with(const char *hay, const char *needl)
 
 char *_strcat(char *dest, char *src)
 {
-    char *s = dest;
+	char *s = dest;
 
-    while (*dest != '\0')
-    {
-        dest++;
-    }
+	while (*dest != '\0')
+	{
+		dest++;
+	}
 
-    while (*src != '\0')
-    {
-	*dest = *src;
-	dest++;
-	src++;
-    }
-    *dest = '\0';
-    return (s);
+	while (*src != '\0')
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	*dest = '\0';
+	return (s);
 }
 
 /**
@@ -98,11 +98,11 @@ char *_strcat(char *dest, char *src)
 
 int _strlen(const char *s)
 {
-        int i = 0;
+	int i = 0;
 
-        while (s[i] != '\0')
-        {
-                i++;
-        }
-        return (i);
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }

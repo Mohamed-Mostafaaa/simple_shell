@@ -1,59 +1,26 @@
 #include "shell.h"
 
 /**
- * sigintHand - blocks ctrl-C
- * @signum: the signal number
- *
- * Return: void
- */
-
-void sigintHand(__attribute__((unused)) int signum)
-{
-	_puts("\n");
-	_puts("$ ");
-	_putchar(BUF_FLUSH);
-}
-
-/**
- * input_buf - buffers chained commands
+ * read_buf - reads a buffer
  * @inf: parameter struct
- * @bu: address of buffer
- * @len: address of len var
+ * @buf: buffer
+ * @i: size
  *
- * Return: bytes read
+ * Return: r
  */
 
-ssize_t input_buf(info_t *inf, char **bu, size_t *len)
+ssize_t read_buf(info_t *inf, char *buf, size_t *i)
 {
 	ssize_t r = 0;
-	size_t len_p = 0;
 
-	if (!*len) /* if nothing left in the buffer, fill it */
+	if (*i)
 	{
-		free(*bu);
-		*bu = NULL;
-		signal(SIGINT, sigintHand);
-#if USE_GETLINE
-		r = getline(bu, &len_p, stdin);
-#else
-		r = _getline(inf, bu, &len_p);
-#endif
-		if (r > 0)
-		{
-			if ((*bu)[r - 1] == '\n')
-			{
-				(*bu)[r - 1] = '\0'; /* remove trailing newline */
-				r--;
-			}
-			inf->linecount_flag = 1;
-			remove_comments(*bu);
-			build_hist_list(inf, *bu, inf->histcount++);
-			if (_strchr(*buf, ';')) /* is this a command chain? */
-			{
-				*len = r;
-				inf->cmd_buf = bu;
-			}
-		}
+		return (0);
+	}
+	r = read(inf->readfd, buf, READ_BUF_SIZE);
+	if (r >= 0)
+	{
+		*i = r;
 	}
 	return (r);
 }
@@ -103,6 +70,64 @@ int _getline(info_t *inf, char **pt, size_t *leng)
 }
 
 /**
+ * sigintHand - blocks ctrl-C
+ * @signum: the signal number
+ *
+ * Return: void
+ */
+
+void sigintHand(__attribute__((unused)) int signum)
+{
+	_puts("\n");
+	_puts("$ ");
+	_putchar(BUF_FLUSH);
+}
+
+/**
+ * input_buf - buffers chained commands
+ * @inf: parameter struct
+ * @bu: address of buffer
+ * @len: address of len var
+ *
+ * Return: bytes read
+ */
+
+ssize_t input_buf(info_t *inf, char **bu, size_t *len)
+{
+	ssize_t r = 0;
+	size_t len_p = 0;
+
+	if (!*len) /* if nothing left in the buffer, fill it */
+	{
+		free(*bu);
+		*bu = NULL;
+		signal(SIGINT, sigintHand);
+#if USE_GETLINE
+		r = getline(bu, &len_p, stdin);
+#else
+		r = _getline(inf, bu, &len_p);
+#endif
+		if (r > 0)
+		{
+			if ((*bu)[r - 1] == '\n')
+			{
+				(*bu)[r - 1] = '\0'; /* remove trailing newline */
+				r--;
+			}
+			inf->linecount_flag = 1;
+			remove_comments(*bu);
+			build_hist_list(inf, *bu, inf->histcount++);
+			if (_strchr(*bu, ';')) /* is this a command chain? */
+			{
+				*len = r;
+				inf->cmd_buf = bu;
+			}
+		}
+	}
+	return (r);
+}
+
+/**
  * get_input - gets a line minus the newline
  * @inf: parameter struct
  *
@@ -146,31 +171,7 @@ ssize_t get_input(info_t *inf)
 		return (_strlen(p));
 	}
 
-	*buf_p = buf;
+	*buf_p = bu;
 	return (r);
 }
 
-/**
- * read_buf - reads a buffer
- * @inf: parameter struct
- * @buf: buffer
- * @i: size
- *
- * Return: r
- */
-
-ssize_t read_buf(info_t *inf, char *buf, size_t *i)
-{
-	ssize_t r = 0;
-
-	if (*i)
-	{
-		return (0);
-	}
-	r = read(inf->readfd, buf, READ_BUF_SIZE);
-	if (r >= 0)
-	{
-		*i = r;
-	}
-	return (r);
-}

@@ -32,15 +32,15 @@ void free_info(info_t *inf, int al)
 		}
 		if (!inf->env)
 		{
-			free_list(&(inf->env));
+			free_list(inf->env);
 		}
 		if (!inf->hist)
 		{
-			free_list(&(inf->hist));
+			free_list(inf->hist);
 		}
 		if (!inf->alias)
 		{
-			free_list(&(inf->alias));
+			free_list(inf->alias);
 		}
 		ffree(inf->environ);
 		inf->environ = NULL;
@@ -76,9 +76,9 @@ void set_info(info_t *inf, char **ev)
 				inf->argv[1] = NULL;
 			}
 		}
-		for (i = 0; inf->argv && inf->argv[i]; i++)
+		for (j = 0; inf->argv && inf->argv[j]; j++)
 			;
-		inf->argc = i;
+		inf->argc = j;
 		replace_alias(inf);
 		replace_vars(inf);
 	}

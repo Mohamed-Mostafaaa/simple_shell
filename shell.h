@@ -146,7 +146,7 @@ int _setenv(info_t *, char *, char *);
 char *get_hist_file(info_t *inf);
 int write_hist(info_t *inf);
 int read_hist(info_t *inf);
-int build_hist_list(info_t *inf, char *buf);
+int build_hist_list(info_t *inf, char *buf, int);
 int renum_hist(info_t *inf);
 
 /* info module */

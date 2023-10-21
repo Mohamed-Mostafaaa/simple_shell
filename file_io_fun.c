@@ -50,7 +50,7 @@ int write_hist(info_t *inf)
 	free(filename);
 	if (fd == -1)
 		return (-1);
-	for (nod = inf->hist; nod; nod = node->next)
+	for (nod = inf->hist; nod; nod = nod->next)
 	{
 		_putsfd(nod->str, fd);
 		_putfd('\n', fd);
@@ -155,5 +155,5 @@ int build_hist_list(info_t *inf, char *bu, int line_count)
 	{
 		inf->hist = nod;
 	}
-	return (0);
+	return (line_count);
 }

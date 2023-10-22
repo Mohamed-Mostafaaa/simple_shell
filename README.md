@@ -14,7 +14,7 @@ simple_shell is a project on the UNIX Shell. The UNIX Shell is a command-line in
 * [General Requirements](#General-Requirements)
 * [Target output](#Target-output)
 * [Tasks](#Tasks)
-* [List of allowed functions](#List-of-allowed-functions)
+* [List of allowed functions](#List-of-allowed-functions/syscalls)
 
 ## Installation
 ```

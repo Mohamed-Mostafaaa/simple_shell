@@ -14,7 +14,7 @@ simple_shell is a project on the UNIX Shell. The UNIX Shell is a command-line in
 * [General Requirements](#General-Requirements)
 * [Target output](#Target-output)
 * [Tasks](#Tasks)
-* [List of allowed functions](#List-of-allowed-functionssyscalls)
+* [List of allowed functions](#List-of-allowed-functions-/-syscalls)
 
 ## Installation
 ```
@@ -142,7 +142,7 @@ handle commands with arguments
 11. File as an input 
 - Your shell should take a file as a command line argument
 
-## List of allowed functions/syscalls
+## List of allowed functions / syscalls
 | Functions | Reference |
 | --------- | --------- |
 | `access` | [man 2 access](https://linux.die.net/man/2/access) |

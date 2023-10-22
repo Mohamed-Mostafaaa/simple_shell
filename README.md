@@ -13,8 +13,10 @@ simple_shell is a project on the UNIX Shell. The UNIX Shell is a command-line in
 * [Testing](#Testing)
 * [General Requirements](#General-Requirements)
 * [Target output](#Target-output)
+* [Example of Use](#Examples)
 * [Tasks](#Tasks)
 * [List of allowed functions](#list-of-allowed-functions--syscalls)
+* [Authors](#authors)
 
 ## Installation
 ```
@@ -66,6 +68,68 @@ $ echo "qwerty" | ./hsh
 $ echo "qwerty" | ./././hsh
 ./././hsh: 1: qwerty: not found
 $
+```
+
+### Examples
+<div id="examples"><div/>
+
+1. Absolute path commands
+- noninteractive
+```bash
+$ echo "/bin/pwd" | ./hsh
+$ /home/timex/simple_shell
+```
+- interactive mode
+``` bash
+$ ./hsh
+./hsh$ /bin/echo hello world
+hello world
+./hsh$ exit
+$
+```
+2. short command
+- noninteractive
+```bash
+$ echo "pwd" | ./hsh
+$ /home/timex/simple_shell
+```
+- interactive mode
+``` bash
+$ ./hsh
+./hsh$ echo hello world
+hello world
+./hsh$ exit
+$
+```
+3. built-ins
+- noninteractive
+```bash
+$ echo "exit" | ./hsh
+$ echo $?
+0
+```
+- interactive mode
+``` bash
+$ ./hsh
+./hsh$ exit 98
+$ echo $?
+98
+```
+
+**Some error output**
+``` bash
+$ ./hsh
+./hsh$ ls /non_existing_folder
+ls: cannot access '/non_existing_folder': No such file or directory
+./hsh$ exit
+$ echo $?
+2
+```
+``` bash
+$ echo "non_valid_command" | ./hsh
+./hsh: 1: non_valid_command: not found
+$ echo $?
+127
 ```
 
 ## Tasks
@@ -175,3 +239,8 @@ handle commands with arguments
 | `wait3` | [man 2 wait3](https://linux.die.net/man/2/wait3) |
 | `wait4` | [man 2 wait4](https://linux.die.net/man/2/wait4) |
 | `write` | [man 2 write](https://linux.die.net/man/2/write) |
+
+## Authors
+
+Mohamed Mostafa Abdelhamed [Mohamed-Mostafaaa](https://github.com/Mohamed-Mostafaaa) 
+

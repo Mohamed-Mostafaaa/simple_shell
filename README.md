@@ -14,8 +14,8 @@ simple_shell is a project on the UNIX Shell. The UNIX Shell is a command-line in
 * [General Requirements](#General-Requirements)
 * [Target output](#Target-output)
 * [Tasks](#Tasks)
-* [List of allowed functions](##list-of-allowed-functions--syscalls)
-https://github.com/Mohamed-Mostafaaa/simple_shell/blob/main/README.md#list-of-allowed-functions--syscalls
+* [List of allowed functions](#list-of-allowed-functions--syscalls)
+
 ## Installation
 ```
 git clone https://github.com/patrickdeyoreo/simple_shell.git

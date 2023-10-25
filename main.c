@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * main - the main function
  * @countarr: Numbers of arguments
@@ -8,12 +9,12 @@
 int main(int countarr, char **arr)
 {
 	int descF = 2;
-	type_info f[] = { InitInfo };
+	type_info f[] = {InitInfo};
 
-	asm ("mov %1, %0\n\t"
-			"add $3, %0"
-			: "=r" (descF)
-			: "r" (descF));
+	asm("mov %1, %0\n\t"
+		"add $3, %0"
+		: "=r"(descF)
+		: "r"(descF));
 	if (countarr == 2)
 	{
 		descF = open(arr[1], O_RDONLY);

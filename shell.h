@@ -16,27 +16,29 @@
 #define WriteBufSize 1024
 #define BufFlush -1
 #define CmdNorm 0
-#define CmdOr       1
-#define CmdAnd      2
-#define CmdChain    3
-#define ConvertLowercase    1
+#define CmdOr 1
+#define CmdAnd 2
+#define CmdChain 3
+#define ConvertLowercase 1
 #define UnsignedConvert 2
 #define USE_GETLINE 0
 #define USE_STRTOK 0
-#define FileHist    ".simple_shell_history"
+#define FileHist ".simple_shell_history"
 #define MaxHist 4096
 extern char **environ;
+
 /**
  * struct strList - list
  * @num: number
  * @str: string
  * @next: next
  */
+
 typedef struct strList
 {
-int num;
-char *str;
-struct strList *next;
+	int num;
+	char *str;
+	struct strList *next;
 } type_List;
 /**
  * struct infoPass - Huge List
@@ -59,30 +61,33 @@ struct strList *next;
  * @readfd: file description
  * @histcount: count of history
  */
+
 typedef struct infoPass
 {
-char *arg;
-char **argv;
-char *path;
-int argc;
-unsigned int line_count;
-int err_num;
-int linecount_flag;
-char *fname;
-type_List *env;
-type_List *history;
-type_List *alias;
-char **environ;
-int env_changed;
-int status;
-char **cmd_buf;
-int cmd_buf_type;
-int readfd;
-int histcount;
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
+	char *fname;
+	type_List *env;
+	type_List *history;
+	type_List *alias;
+	char **environ;
+	int env_changed;
+	int status;
+	char **cmd_buf;
+	int cmd_buf_type;
+	int readfd;
+	int histcount;
 } type_info;
-#define InitInfo \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-0, 0, 0}
+#define InitInfo                                                                \
+	{                                                                           \
+		NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+			0, 0, 0                                                             \
+	}
 /**
  * struct Built - all builtin functions
  * @type: flage
@@ -90,9 +95,10 @@ int histcount;
  */
 typedef struct Built
 {
-char *type;
-int (*func)(type_info *);
+	char *type;
+	int (*func)(type_info *);
 } TableBuilt;
+
 int our_lengthstr(char *);
 int our_compStr(char *, char *);
 char *pointOfSt(const char *, const char *);
@@ -175,4 +181,5 @@ int alias_REPLACING(type_info *);
 int VarReplacing(type_info *);
 int alias_unsetting(type_info *, char *);
 int alias_printing(type_List *);
+
 #endif

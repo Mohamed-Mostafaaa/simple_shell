@@ -140,7 +140,6 @@ $ echo $?
 1. README, man, AUTHORS
 - Write a README
 - Write a man for your shell.
-- You should have an AUTHORS file at the root of your repository, listing all individuals having contributed content to the repository.
 
 2. Simple shell 0.1
 - Write a UNIX command line interpreter.
@@ -245,5 +244,5 @@ handle commands with arguments
 
 ## Authors
 
-Mohamed Mostafa Abdelhamed [Mohamed-Mostafaaa](https://github.com/Mohamed-Mostafaaa) 
+ - Mohamed Mostafa Abdelhamed [@Mohamed-Mostafaaa](https://github.com/Mohamed-Mostafaaa) 
 

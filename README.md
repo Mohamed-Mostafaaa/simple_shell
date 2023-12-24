@@ -23,7 +23,7 @@ simple_shell is a project on the UNIX Shell. The UNIX Shell is a command-line in
 
 ## Installation
 ```
-git clone https://github.com/patrickdeyoreo/simple_shell.git
+git clone https://github.com/Mohamed-Mostafaaa/simple_shell.git
 cd simple_shell
 gcc *.c -o hsh
 ```

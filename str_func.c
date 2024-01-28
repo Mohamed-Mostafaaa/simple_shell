@@ -1,9 +1,11 @@
 #include "shell.h"
+
 /**
  * our_atoi - obtain integer from string
  * @string: string
  * Return: number or zero
  */
+
 int our_atoi(char *string)
 {
 	unsigned int r = 0;
